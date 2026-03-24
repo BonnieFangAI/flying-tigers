@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #C5A55A;
@@ -18,45 +18,43 @@
             --gold-dark: #A68B3C;
             --navy: #0A1628;
             --navy-light: #132240;
-            --cream: #F5F0E8;
             --white: #FFFFFF;
-            --red: #B44040;
             --text-light: #E8E0D0;
             --text-muted: #9CA3AF;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Inter', 'Noto Serif SC', sans-serif;
-            background: var(--navy);
-            color: var(--text-light);
-            line-height: 1.7;
-            overflow-x: hidden;
+            background: var(--navy); color: var(--text-light);
+            line-height: 1.7; overflow-x: hidden;
         }
 
-        /* ===== NAV ===== */
+        /* NAV */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(10, 22, 40, 0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(197, 165, 90, 0.15);
+            background: rgba(10, 22, 40, 0.92); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(197, 165, 90, 0.12);
         }
         .nav-inner {
             max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-            display: flex; justify-content: space-between; align-items: center; height: 70px;
+            display: flex; justify-content: space-between; align-items: center; height: 72px;
         }
-        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo-icon { font-size: 28px; }
+        .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
         .nav-logo-text {
             font-family: 'Noto Serif SC', serif; font-size: 1rem;
-            font-weight: 600; color: var(--gold); letter-spacing: 0.05em;
+            font-weight: 700; color: var(--gold); letter-spacing: 0.08em;
         }
-        .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+        .nav-logo-sub {
+            font-family: 'Cinzel', serif; font-size: 0.6rem;
+            color: var(--text-muted); letter-spacing: 0.15em; display: block;
+            text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a {
-            color: var(--text-light); text-decoration: none; font-size: 0.85rem;
-            letter-spacing: 0.05em; transition: color 0.3s;
+            color: var(--text-light); text-decoration: none; font-size: 0.82rem;
+            letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s;
+            font-weight: 400;
         }
         .nav-links a:hover { color: var(--gold); }
         .mobile-toggle {
@@ -64,313 +62,358 @@
             color: var(--gold); font-size: 1.5rem; cursor: pointer;
         }
 
-        /* ===== HERO ===== */
+        /* HERO - FULL SCREEN WITH P-40 IMAGE */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             position: relative; overflow: hidden;
-            background: linear-gradient(135deg, var(--navy) 0%, #0D1F3C 50%, #111827 100%);
         }
-        .hero::before {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(197, 165, 90, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(180, 64, 64, 0.05) 0%, transparent 50%);
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/c/cd/A_Chinese_soldier_guards_a_line_of_American_P-40_fighter_planes%2C_painted_with_the_shark-face_emblem_of_the_Flying..._-_NARA_-_535531.jpg') center center / cover no-repeat;
         }
-        .hero-content { text-align: center; position: relative; z-index: 2; padding: 2rem; max-width: 900px; }
-        .hero-emblem { font-size: 4.5rem; margin-bottom: 1.5rem; display: block; animation: fadeIn 1s ease; }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg,
+                rgba(10, 22, 40, 0.7) 0%,
+                rgba(10, 22, 40, 0.5) 40%,
+                rgba(10, 22, 40, 0.8) 100%
+            );
+        }
+        .hero-content {
+            text-align: center; position: relative; z-index: 2;
+            padding: 2rem; max-width: 950px;
+        }
         .hero-title-cn {
             font-family: 'Noto Serif SC', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
-            color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.5rem;
+            font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 700;
+            color: var(--white); letter-spacing: 0.12em; margin-bottom: 0.8rem;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
             animation: slideUp 0.8s ease 0.2s both;
         }
         .hero-title-en {
             font-family: 'Cinzel', serif;
-            font-size: clamp(0.8rem, 1.6vw, 1.1rem); font-weight: 400;
-            color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase;
-            margin-bottom: 2.5rem; animation: slideUp 0.8s ease 0.4s both;
+            font-size: clamp(0.7rem, 1.4vw, 1rem); font-weight: 400;
+            color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase;
+            margin-bottom: 3rem; animation: slideUp 0.8s ease 0.4s both;
         }
         .hero-divider {
-            width: 80px; height: 1px;
+            width: 100px; height: 1px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 0 auto 2rem; animation: slideUp 0.8s ease 0.5s both;
+            margin: 0 auto 2.5rem; animation: slideUp 0.8s ease 0.5s both;
         }
         .hero-subtitle {
             font-family: 'Noto Serif SC', serif;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-light); font-weight: 400; line-height: 2; opacity: 0.9;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-light); font-weight: 400; line-height: 2.2; opacity: 0.95;
             animation: slideUp 0.8s ease 0.6s both;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.4);
         }
         .hero-cta {
-            margin-top: 3rem; display: flex; gap: 1rem;
+            margin-top: 3rem; display: flex; gap: 1.2rem;
             justify-content: center; flex-wrap: wrap;
             animation: slideUp 0.8s ease 0.8s both;
         }
         .btn {
-            padding: 12px 32px; border-radius: 2px; font-size: 0.9rem;
-            font-weight: 500; text-decoration: none; letter-spacing: 0.1em;
-            transition: all 0.3s; cursor: pointer;
+            padding: 14px 36px; border-radius: 0; font-size: 0.85rem;
+            font-weight: 500; text-decoration: none; letter-spacing: 0.15em;
+            text-transform: uppercase; transition: all 0.3s; cursor: pointer;
         }
         .btn-primary {
-            background: var(--gold); color: var(--navy); border: 1px solid var(--gold);
+            background: var(--gold); color: var(--navy); border: 2px solid var(--gold);
         }
         .btn-primary:hover {
-            background: var(--gold-light); transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(197, 165, 90, 0.25);
+            background: transparent; color: var(--gold);
+            box-shadow: 0 0 30px rgba(197, 165, 90, 0.2);
         }
         .btn-outline {
-            background: transparent; color: var(--gold);
-            border: 1px solid rgba(197, 165, 90, 0.4);
+            background: transparent; color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
         .btn-outline:hover {
-            border-color: var(--gold); background: rgba(197, 165, 90, 0.1);
-            transform: translateY(-2px);
+            border-color: var(--gold); color: var(--gold);
         }
         .scroll-indicator {
             position: absolute; bottom: 2rem; left: 50%;
             transform: translateX(-50%); animation: bounce 2s infinite;
         }
         .scroll-indicator span {
-            display: block; width: 1px; height: 40px;
+            display: block; width: 1px; height: 50px;
             background: linear-gradient(to bottom, var(--gold), transparent);
         }
 
-        /* ===== SECTIONS ===== */
-        section { padding: 6rem 2rem; }
+        /* SECTIONS */
+        section { padding: 7rem 2rem; }
         .section-inner { max-width: 1100px; margin: 0 auto; }
         .section-label {
-            font-family: 'Cinzel', serif; font-size: 0.75rem;
-            letter-spacing: 0.3em; text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: 0.7rem;
+            letter-spacing: 0.35em; text-transform: uppercase;
             color: var(--gold); margin-bottom: 0.5rem;
         }
         .section-title {
             font-family: 'Noto Serif SC', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700;
-            color: var(--white); margin-bottom: 1rem;
+            font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700;
+            color: var(--white); margin-bottom: 1.2rem;
         }
-        .gold-line { width: 50px; height: 2px; background: var(--gold); margin-bottom: 2rem; }
+        .gold-line { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; }
 
-        /* ===== HISTORY ===== */
-        .history { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%); }
-        .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        .history-text p { margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.9; }
-        .highlight-card {
-            background: rgba(197, 165, 90, 0.05);
-            border: 1px solid rgba(197, 165, 90, 0.12);
-            border-left: 3px solid var(--gold);
-            padding: 1.5rem; border-radius: 0 4px 4px 0; margin-bottom: 1.5rem;
+        /* IMAGE FEATURE SECTIONS */
+        .feature-section {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            min-height: 500px;
         }
-        .highlight-card h4 {
-            font-family: 'Noto Serif SC', serif; color: var(--gold);
-            font-size: 1rem; margin-bottom: 0.5rem;
+        .feature-image {
+            background-size: cover; background-position: center;
+            min-height: 400px; position: relative;
         }
-        .highlight-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+        .feature-image::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 60%, var(--navy) 100%);
+        }
+        .feature-image.right::after {
+            background: linear-gradient(270deg, transparent 60%, var(--navy-light) 100%);
+        }
+        .feature-text {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 4rem 3.5rem;
+        }
+        .feature-text p { margin-bottom: 1.5rem; font-size: 1rem; line-height: 2; }
 
-        /* ===== FRIENDSHIP ===== */
+        /* HISTORY */
+        .history { background: var(--navy); }
+        .history-content { max-width: 800px; }
+        .history-content p { margin-bottom: 1.8rem; font-size: 1.05rem; line-height: 2; }
+
+        /* PHOTO BANNER */
+        .photo-banner {
+            width: 100%; height: 450px; position: relative; overflow: hidden;
+        }
+        .photo-banner img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .photo-banner .overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.6) 100%);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .photo-banner .caption {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--white); text-align: center;
+            max-width: 700px; padding: 2rem; line-height: 2;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+        .photo-banner .caption-source {
+            display: block; margin-top: 1rem;
+            font-family: 'Cinzel', serif; font-size: 0.8rem;
+            color: var(--gold); letter-spacing: 0.1em;
+        }
+
+        /* FRIENDSHIP */
         .friendship { background: var(--navy-light); }
         .friendship-intro {
-            max-width: 800px; margin-bottom: 3rem;
-            font-size: 1.05rem; line-height: 1.9;
+            max-width: 800px; margin-bottom: 3.5rem;
+            font-size: 1.05rem; line-height: 2;
         }
         .friendship-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
         }
         .friendship-card {
-            background: rgba(10, 22, 40, 0.6);
-            border: 1px solid rgba(197, 165, 90, 0.1);
-            padding: 2rem; border-radius: 4px; transition: all 0.3s;
+            background: rgba(10, 22, 40, 0.7);
+            border: 1px solid rgba(197, 165, 90, 0.08);
+            padding: 2.2rem; transition: all 0.3s;
+            border-left: 3px solid rgba(197, 165, 90, 0.3);
         }
         .friendship-card:hover {
-            border-color: rgba(197, 165, 90, 0.25);
-            transform: translateY(-3px);
+            border-left-color: var(--gold);
+            background: rgba(10, 22, 40, 0.9);
         }
         .friendship-card .tag {
-            font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-            color: var(--gold); margin-bottom: 0.8rem; display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1rem; display: block;
         }
         .friendship-card h4 {
             font-family: 'Noto Serif SC', serif; color: var(--white);
             font-size: 1.05rem; margin-bottom: 0.8rem; line-height: 1.5;
         }
         .friendship-card p {
-            font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;
-        }
-        .friendship-card .source {
-            font-size: 0.75rem; color: rgba(197, 165, 90, 0.5);
-            margin-top: 0.8rem; display: block;
+            font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
         }
 
-        /* ===== ABOUT ===== */
+        /* ABOUT */
         .about { background: var(--navy); }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        .about-text p { margin-bottom: 1.5rem; line-height: 1.9; }
-        .mission-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .mission-card {
-            background: rgba(19, 34, 64, 0.6);
-            border: 1px solid rgba(197, 165, 90, 0.1);
-            padding: 2rem 1.5rem; text-align: center; border-radius: 4px;
-            transition: all 0.3s;
+        .about-text p { margin-bottom: 1.8rem; line-height: 2; font-size: 1.02rem; }
+        .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .value-card {
+            background: rgba(19, 34, 64, 0.5);
+            border: 1px solid rgba(197, 165, 90, 0.08);
+            padding: 2rem 1.5rem; text-align: center;
         }
-        .mission-card:hover { border-color: rgba(197, 165, 90, 0.3); transform: translateY(-4px); }
-        .mission-card .icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-        .mission-card h4 {
+        .value-card h4 {
             font-family: 'Noto Serif SC', serif; color: var(--gold);
-            font-size: 1rem; margin-bottom: 0.5rem;
+            font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;
         }
-        .mission-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .value-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
 
-        /* ===== TIMELINE ===== */
-        .timeline-section { background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 100%); }
+        /* QUOTE SECTION */
+        .quote-section {
+            background: var(--navy-light); text-align: center; padding: 6rem 2rem;
+        }
+        .quote-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+            color: var(--text-light); font-weight: 400; line-height: 2.2;
+            max-width: 800px; margin: 0 auto 1.5rem;
+            font-style: italic;
+        }
+        .quote-author {
+            font-family: 'Cinzel', serif; font-size: 0.85rem;
+            color: var(--gold); letter-spacing: 0.1em;
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: var(--navy);
+            border-top: 1px solid rgba(197, 165, 90, 0.1);
+            border-bottom: 1px solid rgba(197, 165, 90, 0.1);
+            padding: 3.5rem 2rem;
+        }
+        .stats-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;
+        }
+        .stat { text-align: center; flex: 1; min-width: 150px; }
+        .stat-number {
+            font-family: 'Cinzel', serif; font-size: 2.8rem;
+            font-weight: 700; color: var(--gold); display: block;
+        }
+        .stat-label {
+            font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* TIMELINE */
+        .timeline-section { background: var(--navy-light); }
         .timeline { position: relative; max-width: 800px; margin: 0 auto; }
         .timeline::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-            width: 1px; background: linear-gradient(to bottom, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+            width: 1px; background: rgba(197, 165, 90, 0.25);
             transform: translateX(-50%);
         }
-        .timeline-item {
-            display: flex; margin-bottom: 3rem; position: relative;
-        }
+        .timeline-item { display: flex; margin-bottom: 3.5rem; position: relative; }
         .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
-        .timeline-item:nth-child(odd) .timeline-content { text-align: right; padding-right: 3rem; padding-left: 0; }
-        .timeline-item:nth-child(even) .timeline-content { padding-left: 3rem; }
+        .timeline-item:nth-child(odd) .timeline-content { text-align: right; padding-right: 3.5rem; padding-left: 0; }
+        .timeline-item:nth-child(even) .timeline-content { padding-left: 3.5rem; }
         .timeline-content { width: 50%; }
         .timeline-dot {
-            position: absolute; left: 50%; top: 8px;
-            width: 12px; height: 12px; border-radius: 50%;
-            background: var(--gold); border: 2px solid var(--navy);
-            transform: translateX(-50%); z-index: 1;
+            position: absolute; left: 50%; top: 6px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--gold); transform: translateX(-50%); z-index: 1;
         }
         .timeline-year {
-            font-family: 'Cinzel', serif; font-size: 1.3rem;
-            color: var(--gold); margin-bottom: 0.3rem;
+            font-family: 'Cinzel', serif; font-size: 1.4rem;
+            color: var(--gold); margin-bottom: 0.4rem; font-weight: 600;
         }
         .timeline-event {
             font-family: 'Noto Serif SC', serif; font-size: 1rem;
-            color: var(--white); margin-bottom: 0.3rem;
+            color: var(--white); margin-bottom: 0.4rem;
         }
-        .timeline-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+        .timeline-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
 
-        /* ===== VISION (QUOTE) ===== */
-        .vision { background: var(--navy-light); text-align: center; }
-        .vision-quote {
-            font-family: 'Noto Serif SC', serif;
-            font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-            color: var(--gold-light); font-weight: 400; line-height: 2.2;
-            max-width: 800px; margin: 0 auto 1.5rem;
-            position: relative; padding: 0 2rem;
-        }
-        .vision-quote::before { content: '\201C'; font-family: 'Cinzel', serif; font-size: 4rem; color: rgba(197,165,90,0.2); position: absolute; top: -1.5rem; left: -0.5rem; }
-        .vision-quote::after { content: '\201D'; font-family: 'Cinzel', serif; font-size: 4rem; color: rgba(197,165,90,0.2); position: absolute; bottom: -2.5rem; right: -0.5rem; }
-        .vision-author {
-            font-size: 0.9rem; color: var(--text-muted); margin-top: 2rem;
-        }
-        .vision-stats {
-            display: flex; justify-content: center; gap: 4rem;
-            margin-top: 3.5rem; flex-wrap: wrap;
-        }
-        .stat { text-align: center; }
-        .stat-number {
-            font-family: 'Cinzel', serif; font-size: 2.5rem;
-            font-weight: 700; color: var(--gold);
-        }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; }
-
-        /* ===== MONROE ===== */
+        /* MONROE */
         .monroe { background: var(--navy); }
-        .monroe-intro { max-width: 750px; margin-bottom: 3rem; }
-        .monroe-intro p { font-size: 1.05rem; line-height: 1.9; }
+        .monroe-intro { max-width: 750px; margin-bottom: 3.5rem; }
+        .monroe-intro p { font-size: 1.05rem; line-height: 2; }
         .project-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
         }
         .project-card {
-            background: rgba(197, 165, 90, 0.04);
-            border: 1px solid rgba(197, 165, 90, 0.1);
-            padding: 2rem; border-radius: 4px; transition: all 0.3s;
+            background: rgba(19, 34, 64, 0.4);
+            border: 1px solid rgba(197, 165, 90, 0.08);
+            padding: 2.2rem 1.8rem; transition: all 0.3s;
         }
         .project-card:hover {
-            border-color: rgba(197, 165, 90, 0.25);
-            background: rgba(197, 165, 90, 0.07);
+            border-color: rgba(197, 165, 90, 0.2);
+            background: rgba(19, 34, 64, 0.6);
         }
-        .project-card .icon { font-size: 2rem; margin-bottom: 1rem; }
         .project-card h4 {
             font-family: 'Noto Serif SC', serif; color: var(--white);
-            font-size: 1.05rem; margin-bottom: 0.5rem;
+            font-size: 1.05rem; margin-bottom: 0.8rem;
         }
-        .project-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+        .project-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; }
 
-        /* ===== MUSEUM ===== */
-        .museum { background: var(--navy-light); }
-        .museum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .museum-text h3 {
-            font-family: 'Noto Serif SC', serif; font-size: 1.3rem;
-            color: var(--gold); margin-bottom: 1rem;
+        /* MUSEUM FEATURE */
+        .museum-bg {
+            background: url('https://upload.wikimedia.org/wikipedia/commons/0/02/Chennault_Aviation_and_Military_Museum_in_Monroe%2C_LA_IMG_4155.JPG') center center / cover no-repeat;
         }
-        .museum-text p { margin-bottom: 1.5rem; line-height: 1.9; }
-        .museum-info { display: flex; flex-direction: column; gap: 1.2rem; }
-        .museum-info-item {
-            background: rgba(10, 22, 40, 0.5);
-            border: 1px solid rgba(197, 165, 90, 0.1);
-            padding: 1.2rem 1.5rem; border-radius: 4px;
-            display: flex; gap: 1rem; align-items: center;
-        }
-        .museum-info-item .icon { font-size: 1.5rem; flex-shrink: 0; }
-        .museum-info-item .info h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.2rem; }
-        .museum-info-item .info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
 
-        /* ===== CONTACT ===== */
-        .contact { background: var(--navy); text-align: center; }
+        /* CONTACT */
+        .contact { background: var(--navy-light); text-align: center; }
         .contact-info {
-            display: flex; justify-content: center; gap: 3rem;
-            flex-wrap: wrap; margin-top: 2rem;
+            display: flex; justify-content: center; gap: 4rem;
+            flex-wrap: wrap; margin-top: 2.5rem;
         }
         .contact-item { text-align: center; }
-        .contact-item .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .contact-item h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.3rem; }
+        .contact-item h4 {
+            font-family: 'Cinzel', serif; color: var(--gold);
+            font-size: 0.8rem; margin-bottom: 0.4rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+        }
         .contact-item p, .contact-item a {
             color: var(--text-muted); font-size: 0.9rem; text-decoration: none;
         }
         .contact-item a:hover { color: var(--gold); }
 
-        /* ===== FOOTER ===== */
+        /* FOOTER */
         footer {
-            background: var(--navy); border-top: 1px solid rgba(197, 165, 90, 0.1);
-            padding: 2rem; text-align: center;
+            background: var(--navy); border-top: 1px solid rgba(197, 165, 90, 0.08);
+            padding: 3rem 2rem; text-align: center;
         }
-        footer p { font-size: 0.8rem; color: var(--text-muted); }
-        footer .footer-links { margin-top: 0.5rem; }
+        footer p { font-size: 0.78rem; color: var(--text-muted); }
+        footer .footer-links { margin-top: 0.8rem; }
         footer .footer-links a {
-            color: rgba(197, 165, 90, 0.5); text-decoration: none;
-            font-size: 0.75rem; margin: 0 0.5rem;
+            color: rgba(197, 165, 90, 0.4); text-decoration: none;
+            font-size: 0.7rem; margin: 0 0.8rem; letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
         footer .footer-links a:hover { color: var(--gold); }
 
-        /* ===== ANIMATIONS ===== */
+        /* ANIMATIONS */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* ===== RESPONSIVE ===== */
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .project-grid { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-toggle { display: block; }
             .nav-links.open {
                 display: flex; flex-direction: column;
-                position: absolute; top: 70px; left: 0; right: 0;
+                position: absolute; top: 72px; left: 0; right: 0;
                 background: rgba(10, 22, 40, 0.98); padding: 2rem;
-                gap: 1.5rem; border-bottom: 1px solid rgba(197, 165, 90, 0.15);
+                gap: 1.5rem; border-bottom: 1px solid rgba(197, 165, 90, 0.12);
             }
-            .history-grid, .about-grid, .friendship-grid, .museum-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .mission-cards { grid-template-columns: 1fr; }
-            .vision-stats { gap: 2rem; }
-            section { padding: 4rem 1.5rem; }
+            .feature-section { grid-template-columns: 1fr; }
+            .feature-image { min-height: 250px; }
+            .feature-image::after { background: linear-gradient(0deg, var(--navy) 0%, transparent 100%) !important; }
+            .feature-text { padding: 2.5rem 1.5rem; }
+            .about-grid, .friendship-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .values-grid, .project-grid { grid-template-columns: 1fr; }
+            section { padding: 5rem 1.5rem; }
+            .photo-banner { height: 300px; }
             .timeline::before { left: 20px; }
             .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; padding-left: 50px; }
             .timeline-item .timeline-content,
             .timeline-item:nth-child(odd) .timeline-content { width: 100%; text-align: left; padding: 0; }
             .timeline-dot { left: 20px; }
             .contact-info { flex-direction: column; gap: 2rem; }
+            .stats-inner { justify-content: center; }
         }
     </style>
 </head>
@@ -380,8 +423,10 @@
 <nav>
     <div class="nav-inner">
         <a href="#" class="nav-logo">
-            <span class="nav-logo-icon">🐯</span>
-            <span class="nav-logo-text">飞虎文化交流协会</span>
+            <div>
+                <span class="nav-logo-text">飞虎文化交流协会</span>
+                <span class="nav-logo-sub">Flying Tigers Cultural Exchange</span>
+            </div>
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#history">飞虎历史</a></li>
@@ -389,23 +434,22 @@
             <li><a href="#about">协会简介</a></li>
             <li><a href="#timeline">大事记</a></li>
             <li><a href="#monroe">飞虎小镇</a></li>
-            <li><a href="#museum">博物馆</a></li>
             <li><a href="#contact">联系我们</a></li>
         </ul>
-        <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+        <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button>
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO: P-40 SHARK MOUTH -->
 <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-        <span class="hero-emblem">✈️</span>
         <h1 class="hero-title-cn">美国飞虎文化交流协会</h1>
         <p class="hero-title-en">American Flying Tigers Cultural Exchange Association</p>
         <div class="hero-divider"></div>
         <p class="hero-subtitle">
-            弘扬飞虎精神 · 传承历史记忆 · 推动中美文化交流<br>
-            <span style="font-size:0.9em; opacity:0.7;">Honor the Legacy · Bridge Two Nations · Build the Future</span>
+            弘扬飞虎精神 &middot; 传承历史记忆 &middot; 推动中美文化交流
         </p>
         <div class="hero-cta">
             <a href="#friendship" class="btn btn-primary">中美友谊</a>
@@ -421,38 +465,56 @@
         <p class="section-label">The Flying Tigers</p>
         <h2 class="section-title">飞虎队的故事</h2>
         <div class="gold-line"></div>
-        <div class="history-grid">
-            <div class="history-text">
-                <p>
-                    1937年，美国退役军官<strong>克莱尔·李·陈纳德</strong>（Claire Lee Chennault）受邀赴华，担任中国空军顾问。彼时中国空军力量薄弱，面对日军空袭几乎无力还击。陈纳德以其卓越的空战战术理论，开始系统训练中国飞行员。
-                </p>
-                <p>
-                    1941年，在宋美龄的支持下，陈纳德在美国招募了约100名飞行员和150名地勤人员，组建了<strong>"中国空军美国志愿援华航空队"</strong>（American Volunteer Group，AVG）。他们驾驶的 P-40 战鹰战斗机机头绘有鲨鱼嘴涂装——中国内陆百姓从未见过鲨鱼，却觉得那是老虎的獠牙，于是亲切地称他们为<strong>"飞虎队"</strong>。
-                </p>
-                <p>
-                    1941年12月20日，飞虎队在昆明上空首战告捷，击落入侵日机6架，己方零损失。这场胜利震动了饱受轰炸之苦的中国人民，昆明万人空巷庆祝。此后，迪士尼公司创始人华特·迪士尼亲手为飞虎队设计了"插翅飞虎"的队徽，成为二战中最具辨识度的标志之一。
-                </p>
-                <p>
-                    援华作战期间，<strong>2000余名美籍队员在战斗中牺牲</strong>，200多名队员被中国军民营救，许多中国百姓在营救过程中献出了自己的生命。飞虎队击落敌机297架，护航运输机超千架次，航程累计可绕地球11周——这是用鲜血和生命铸就的中美友谊。
-                </p>
-            </div>
-            <div>
-                <div class="highlight-card">
-                    <h4>🎖️ 陈纳德将军 (1893–1958)</h4>
-                    <p>生于德克萨斯州，长于路易斯安那州门罗市。一战后成为美国陆军航空兵团最出色的战斗机战术教官之一。因坚持己见与陆军高层不合，提前退役后应邀赴华。在中国抗战最艰难的时刻创建飞虎队，成为中美两国人民心中的传奇英雄。1958年在华盛顿去世，被追授中将军衔。</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>✈️ P-40 战鹰 · 鲨鱼嘴传奇</h4>
-                    <p>飞虎队标志性的鲨鱼嘴涂装并非原创——灵感来自北非沙漠的英国空军。但在中国的天空下，它成为了希望与胜利的象征。老百姓说："飞老虎来了，日本人就跑了。"</p>
-                </div>
-                <div class="highlight-card">
-                    <h4>🤝 用生命铸就的友谊</h4>
-                    <p>飞虎队员坠机后，中国百姓冒着日军搜捕的危险进行营救。许多村民为此付出了生命。正如陈纳德所说："中国人民的勇气和牺牲精神，与飞虎队任何一位飞行员相比都毫不逊色。"</p>
-                </div>
-            </div>
+        <div class="history-content">
+            <p>
+                1937年，美国退役军官<strong>克莱尔·李·陈纳德</strong>（Claire Lee Chennault）受邀赴华，担任中国空军顾问。彼时中国空军力量薄弱，面对日军空袭几乎无力还击。陈纳德以其卓越的空战战术理论，开始系统训练中国飞行员。
+            </p>
+            <p>
+                1941年，在宋美龄的支持下，陈纳德在美国招募了约100名飞行员和150名地勤人员，组建了<strong>"中国空军美国志愿援华航空队"</strong>（American Volunteer Group）。他们驾驶的 P-40 战鹰战斗机机头绘有标志性的鲨鱼嘴涂装——中国内陆百姓从未见过鲨鱼，却觉得那是老虎的獠牙，于是亲切地称他们为<strong>"飞虎队"</strong>。
+            </p>
+            <p>
+                1941年12月20日，飞虎队在昆明上空首战告捷，击落入侵日机6架，己方零损失。这场胜利震动了饱受轰炸之苦的中国人民。此后，迪士尼公司创始人华特·迪士尼亲手为飞虎队设计了"插翅飞虎"的队徽，成为二战中最具辨识度的标志之一。
+            </p>
+            <p>
+                援华作战期间，<strong>2,000余名美籍队员在战斗中牺牲</strong>，200多名队员被中国军民营救，许多中国百姓在营救过程中献出了自己的生命。飞虎队击落敌机296架，己方仅损失14名飞行员，创造了二战初期盟军最辉煌的空战纪录——这是用鲜血和生命铸就的中美友谊。
+            </p>
         </div>
     </div>
 </section>
+
+<!-- PILOT PHOTO FEATURE -->
+<div class="feature-section" style="background: var(--navy);">
+    <div class="feature-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f3/Flying_tigers_pilot.jpg');"></div>
+    <div class="feature-text fade-in" style="background: var(--navy);">
+        <p class="section-label">Heritage</p>
+        <h3 style="font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1.5rem;">鲨鱼嘴下的飞虎精神</h3>
+        <p>飞虎队王牌飞行员 R.T. Smith 与他的 P-40 战鹰。机身上的"飞虎"队徽由华特·迪士尼亲自设计。鲨鱼嘴涂装的灵感来自北非英国空军第112中队，但在中国的天空下，它成为了希望与胜利的象征。</p>
+        <p>老百姓说："飞老虎来了，日本人就跑了。" 正如陈纳德将军所言："中国人民的勇气和牺牲精神，与飞虎队任何一位飞行员相比都毫不逊色。"</p>
+        <p style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">图片：R.T. Smith 于昆明机场，背景为飞虎队 P-40 战斗机</p>
+    </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat">
+            <span class="stat-number">1941</span>
+            <span class="stat-label">飞虎队首战昆明</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">296</span>
+            <span class="stat-label">击落敌机</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">2,000+</span>
+            <span class="stat-label">牺牲的美籍队员</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">老兵及家属到访中国</span>
+        </div>
+    </div>
+</div>
 
 <!-- FRIENDSHIP -->
 <section class="friendship" id="friendship">
@@ -461,52 +523,62 @@
         <h2 class="section-title">跨越太平洋的友谊</h2>
         <div class="gold-line"></div>
         <p class="friendship-intro">
-            80多年过去，飞虎精神已超越战争本身，成为中美两国人民建立相互尊重、公平正义、合作共赢关系的永恒精神纽带。从国家领导人到民间百姓，飞虎队的故事始终是中美关系中最温暖的篇章。
+            八十余年过去，飞虎精神已超越战争本身，成为中美两国人民建立相互尊重、合作共赢关系的永恒精神纽带。从国家元首到民间百姓，飞虎队的故事始终是中美关系中最温暖的篇章。
         </p>
         <div class="friendship-grid">
             <div class="friendship-card">
-                <span class="tag">2023年11月 · 旧金山</span>
+                <span class="tag">2023 &middot; San Francisco</span>
                 <h4>习近平主席会见飞虎队老兵</h4>
-                <p>习近平主席在出席APEC期间，特地邀请美中航空遗产基金会主席格林和103岁飞虎队老兵莫耶先生会面叙谈。莫耶先生此后故地重游，登上八达岭长城，在中国度过103岁生日，与孩子们齐声高唱《友谊地久天长》。</p>
+                <p>习近平主席在APEC期间，邀请美中航空遗产基金会主席格林和103岁飞虎队老兵莫耶先生会面。莫耶故地重游登上八达岭长城，在中国度过103岁生日，与孩子们齐声高唱《友谊地久天长》。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2024年4月 · 代顿</span>
-                <h4"铭记英雄"图片展暨中美二战友谊论坛</h4>
-                <p>在俄亥俄州美国国家空军博物馆举办第五届中美二战友谊论坛，中国驻美大使馆、美军前参谋长联席会议主席迈尔斯上将、前驻华大使布兰斯塔德等百余名中美各界人士参加。为牺牲的飞虎队队员哈梅尔中尉举行补名仪式。</p>
+                <span class="tag">2024 &middot; Dayton, Ohio</span>
+                <h4>"铭记英雄"图片展暨中美二战友谊论坛</h4>
+                <p>在美国国家空军博物馆举办第五届中美二战友谊论坛，中国驻美使馆、美军前参谋长联席会议主席迈尔斯上将、前驻华大使布兰斯塔德等百余名中美各界人士出席。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2024年9月 · 南京</span>
+                <span class="tag">2024 &middot; Nanjing</span>
                 <h4>飞虎队历史图片巡展启动</h4>
-                <p>中国驻美大使谢锋出席南京站开幕式，指出"飞虎队精神承载着重情尚义、赓续友好的精神品格"。巡展随后在长汀、长沙、新疆等地举办。近500名飞虎队老兵和数百名家属已到访中国。</p>
+                <p>中国驻美大使谢锋出席开幕式，指出"飞虎队精神承载着重情尚义、赓续友好的精神品格"。巡展随后在长汀、长沙、新疆等地举办。近500名飞虎队老兵和数百名家属已到访中国。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2025年3月 · 华盛顿</span>
-                <h4>纪念反法西斯战争胜利80周年招待会</h4>
-                <p>中国驻美大使在招待会上呼吁"欢迎更多新时期的'飞虎队员'为中美关系克难前行鼓与呼"。80年前中美能超越差异并肩作战，今天更应求同存异，做伙伴而非对手。</p>
+                <span class="tag">2025 &middot; Washington D.C.</span>
+                <h4>纪念反法西斯战争胜利80周年</h4>
+                <p>"80年前中美能超越差异并肩作战，今天更应求同存异，做伙伴而非对手。"中国驻美大使呼吁更多新时期"飞虎队员"为中美关系克难前行鼓与呼。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2025年7月 · 延安</span>
+                <span class="tag">2025 &middot; Yan'an</span>
                 <h4>飞虎队友谊学校青少年研学</h4>
-                <p>美中航空遗产基金会组织83名美国青少年和中国传媒大学师生在延安开展历史探寻与文化交流研学，落实"未来5年邀请5万名美国青少年来华交流学习"的倡议，为中美民间友好交往注入青春活力。</p>
+                <p>美中航空遗产基金会组织83名美国青少年与中国传媒大学师生在延安开展历史探寻与文化交流，落实"5年邀请5万名美国青少年来华交流学习"倡议。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2023年10月 · 桂林</span>
+                <span class="tag">2023 &middot; Guilin</span>
                 <h4>陈纳德将军文物捐赠</h4>
-                <p>陈纳德将军之女陈美丽（Cynthia Chennault）将包括父亲使用过的望远镜在内的80件珍贵文物捐赠给桂林飞虎队遗址公园。"又一次万里迢迢来到中国，来到我父亲曾经战斗过的地方。"</p>
+                <p>陈纳德之女陈美丽将80件珍贵文物捐赠给桂林飞虎队遗址公园。"又一次万里迢迢来到中国，来到父亲曾经战斗过的地方。"</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2024年12月 · 乌鲁木齐</span>
+                <span class="tag">2024 &middot; Urumqi</span>
                 <h4>飞虎队代表团访问新疆</h4>
-                <p>美中航空遗产基金会主席格林率代表团访问新疆，举办飞虎队历史图片展，缔结"飞虎队友谊学校"，走进博物馆和高校，亲身感受新疆的历史文化与社会面貌。</p>
+                <p>美中航空遗产基金会主席格林率代表团访问新疆，举办飞虎队历史图片展，缔结"飞虎队友谊学校"，走进博物馆和高校，亲身感受新疆的历史文化。</p>
             </div>
             <div class="friendship-card">
-                <span class="tag">2025年6月 · 上海</span>
+                <span class="tag">2025 &middot; Shanghai</span>
                 <h4>"友谊：血与火的考验"主题展</h4>
-                <p>纪念抗战胜利80周年主题展在上海开幕。陈纳德外孙女Nell Calloway说："这是一场4500英里的远征。"参会人士表示，飞虎队精神给当下启迪——让所有人思考如何推动中美关系稳定、健康、可持续发展。</p>
+                <p>纪念抗战胜利80周年主题展开幕。陈纳德外孙女Nell Calloway说："这是一场4500英里的远征。"飞虎队精神给当下启迪——推动中美关系稳定、健康、可持续发展。</p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+    <div class="section-inner fade-in">
+        <div class="quote-text">
+            "跨越时空、历久弥新的飞虎队精神，是中美两国的宝贵财富。八十年前，中美能够超越差异分歧并肩作战；在两国具有更多共同利益的今天，更应求同存异，做伙伴而非对手。"
+        </div>
+        <p class="quote-author">&mdash; 中国驻美大使谢锋 &middot; 2024 飞虎队图片展致辞</p>
+    </div>
+</div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
@@ -525,64 +597,24 @@
                 <p>
                     美国飞虎集团是协会的主要资助企业，由中美专业团队搭建跨行业集团公司，下设<strong>文化交流控股、科技创新控股、商贸发展控股</strong>三大板块，共同践行"飞虎精神的商业转化，反哺非营利文化事业"的理念。
                 </p>
-                <p>
-                    协会核心价值观：<strong>诚信 · 正义 · 行善必达 · 互助共赢</strong>
-                </p>
             </div>
-            <div class="mission-cards">
-                <div class="mission-card">
-                    <span class="icon">📜</span>
+            <div class="values-grid">
+                <div class="value-card">
                     <h4>文化传承</h4>
-                    <p>收集、保护飞虎队历史文物，传播飞虎精神</p>
+                    <p>收集保护飞虎队历史文物，传播飞虎精神与故事</p>
                 </div>
-                <div class="mission-card">
-                    <span class="icon">🌏</span>
+                <div class="value-card">
                     <h4>经贸桥梁</h4>
-                    <p>搭建中美合作平台，推动绿色经贸发展</p>
+                    <p>搭建中美合作平台，推动绿色可持续经贸发展</p>
                 </div>
-                <div class="mission-card">
-                    <span class="icon">🎓</span>
+                <div class="value-card">
                     <h4>教育交流</h4>
-                    <p>青少年研学、友谊学校、文化互访</p>
+                    <p>青少年研学、飞虎友谊学校、文化互访项目</p>
                 </div>
-                <div class="mission-card">
-                    <span class="icon">🤝</span>
+                <div class="value-card">
                     <h4>民间外交</h4>
-                    <p>连接飞虎后人、老兵家属与中国人民</p>
+                    <p>连接飞虎后人、老兵家属与中国人民的友谊纽带</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- VISION QUOTE -->
-<section class="vision">
-    <div class="section-inner fade-in">
-        <p class="section-label">Spirit</p>
-        <h2 class="section-title">飞虎精神</h2>
-        <div class="gold-line" style="margin: 0 auto 3rem;"></div>
-        <div class="vision-quote">
-            跨越时空、历久弥新的飞虎队精神，是中美两国的宝贵财富。<br>
-            80年前，中美能够超越差异分歧并肩作战；<br>
-            在两国具有更多共同利益的今天，更应求同存异，做伙伴而非对手。
-        </div>
-        <p class="vision-author">—— 中国驻美大使谢锋 · 2024年南京飞虎队图片展开幕致辞</p>
-        <div class="vision-stats">
-            <div class="stat">
-                <span class="stat-number">1941</span>
-                <span class="stat-label">飞虎队首战昆明</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">2,000+</span>
-                <span class="stat-label">牺牲的美籍队员</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">老兵及家属到访中国</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">80+</span>
-                <span class="stat-label">年历史传承</span>
             </div>
         </div>
     </div>
@@ -607,15 +639,15 @@
                 <div class="timeline-content">
                     <div class="timeline-year">1941</div>
                     <div class="timeline-event">飞虎队正式成立</div>
-                    <div class="timeline-desc">8月1日，中国空军美国志愿援华航空队正式成立，总部设在昆明。12月20日昆明首战告捷，"飞虎队"之名传遍中国。</div>
+                    <div class="timeline-desc">8月1日，中国空军美国志愿援华航空队正式成立。12月20日昆明首战告捷，"飞虎队"之名传遍中国。</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-year">1942</div>
-                    <div class="timeline-event">志愿队改编为美军第14航空队</div>
-                    <div class="timeline-desc">美国正式参战后，志愿队改编为美国陆军第14航空队，陈纳德任司令。飞虎队名义上解散，但精神永存。</div>
+                    <div class="timeline-event">改编为美军第14航空队</div>
+                    <div class="timeline-desc">美国正式参战后，志愿队改编为美国陆军第14航空队，陈纳德任司令。飞虎队精神永存。</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -623,39 +655,31 @@
                 <div class="timeline-content">
                     <div class="timeline-year">1958</div>
                     <div class="timeline-event">陈纳德将军辞世</div>
-                    <div class="timeline-desc">陈纳德在华盛顿逝世，被追授中将军衔。临终前他说："我一生中最美好的时光，都是在中国度过的。"</div>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-year">2005</div>
-                    <div class="timeline-event">《飞虎的咆哮》出版</div>
-                    <div class="timeline-desc">美中航空遗产基金会主席杰弗里·格林撰写的飞虎队历史专著在中国出版，掀起新一轮飞虎文化热。</div>
+                    <div class="timeline-desc">陈纳德在华盛顿逝世，被追授中将军衔。"我一生中最美好的时光，都是在中国度过的。"</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-year">2023</div>
-                    <div class="timeline-event">习近平主席会见飞虎队老兵</div>
-                    <div class="timeline-desc">习近平主席在旧金山APEC期间会见103岁飞虎队老兵莫耶。陈纳德之女陈美丽在桂林捐赠80件文物。飞虎精神在新时代焕发生机。</div>
+                    <div class="timeline-event">飞虎精神在新时代焕发</div>
+                    <div class="timeline-desc">习近平主席在旧金山APEC会见飞虎队老兵。陈纳德之女在桂林捐赠80件珍贵文物。</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-year">2024–2025</div>
+                    <div class="timeline-year">2024&ndash;2025</div>
                     <div class="timeline-event">飞虎队图片展全球巡展</div>
-                    <div class="timeline-desc">从代顿国家空军博物馆到南京、长汀、长沙、新疆、上海……飞虎队主题历史图片展在中美两国多地巡展，缔结数十所"飞虎队友谊学校"。</div>
+                    <div class="timeline-desc">从代顿国家空军博物馆到南京、长汀、长沙、新疆、上海……缔结数十所"飞虎队友谊学校"。</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-year">未来</div>
-                    <div class="timeline-event">飞虎小镇 · 门罗计划</div>
-                    <div class="timeline-desc">在陈纳德将军故乡路易斯安那州门罗市，建设集文化、旅游、教育、投资于一体的"飞虎小镇"国际文旅地标。</div>
+                    <div class="timeline-event">飞虎小镇 &middot; 门罗计划</div>
+                    <div class="timeline-desc">在陈纳德故乡路易斯安那州门罗市，建设集文化、旅游、教育、投资于一体的国际文旅地标。</div>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -663,107 +687,54 @@
     </div>
 </section>
 
+<!-- MUSEUM PHOTO BANNER -->
+<div class="photo-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Chennault_Aviation_and_Military_Museum_in_Monroe%2C_LA_IMG_4155.JPG" alt="Chennault Aviation & Military Museum, Monroe, Louisiana">
+    <div class="overlay">
+        <div class="caption">
+            陈纳德航空军事博物馆<br>
+            世界上最大的陈纳德将军文物收藏<br>
+            <span style="font-size: 0.85em;">701 Kansas Lane, Monroe, Louisiana</span>
+            <span class="caption-source">Chennault Aviation &amp; Military Museum &middot; est. Monroe, LA</span>
+        </div>
+    </div>
+</div>
+
 <!-- MONROE -->
 <section class="monroe" id="monroe">
     <div class="section-inner fade-in">
         <p class="section-label">Flying Tiger Town</p>
-        <h2 class="section-title">飞虎小镇 · 门罗计划</h2>
+        <h2 class="section-title">飞虎小镇 &middot; 门罗计划</h2>
         <div class="gold-line"></div>
         <div class="monroe-intro">
             <p>
-                路易斯安那州门罗市（Monroe）是陈纳德将军的故乡。在这片承载飞虎记忆的土地上，我们正在建设<strong>"飞虎小镇"</strong>——集文化传承、旅游体验、教育培训和商业投资于一体的国际文旅地标。项目同时为投资者提供 <strong>EB-5 投资移民</strong>通道。
+                路易斯安那州门罗市是陈纳德将军的故乡。在这片承载飞虎记忆的土地上，我们正在建设<strong>"飞虎小镇"</strong>——集文化传承、旅游体验、教育培训和商业投资于一体的国际文旅地标。项目同时为投资者提供 <strong>EB-5 投资移民</strong>通道。
             </p>
         </div>
         <div class="project-grid">
             <div class="project-card">
-                <div class="icon">🏨</div>
                 <h4>飞虎主题酒店</h4>
-                <p>紧邻陈纳德航空军事博物馆，设飞虎主题影厅、餐厅及 VR 空战体验，让历史活起来。</p>
+                <p>紧邻博物馆，设飞虎主题影厅、餐厅及 VR 空战体验。让历史可触摸、可沉浸。</p>
             </div>
             <div class="project-card">
-                <div class="icon">🛩️</div>
                 <h4>陈纳德飞行学院</h4>
-                <p>利用现有机场跑道，开设大学飞行课程，提供战机模拟体验，可获 FAA 认证。传承飞虎飞行精神。</p>
+                <p>利用现有机场跑道，开设大学飞行课程，提供 FAA 认证培训与战机模拟体验。</p>
             </div>
             <div class="project-card">
-                <div class="icon">🍺</div>
-                <h4>飞虎啤酒厂</h4>
-                <p>由飞虎队后代创立运营，主题精酿酒屋，将飞虎文化融入美国精酿传统。</p>
+                <h4>飞虎精酿酒厂</h4>
+                <p>由飞虎队后代创立运营，将飞虎文化融入美国精酿传统，打造主题酿酒体验。</p>
             </div>
             <div class="project-card">
-                <div class="icon">🍷</div>
                 <h4>飞虎葡萄酒庄</h4>
-                <p>选址加州纳帕谷，推出"飞虎徽章"酒标系列，打造全美首个军事航空遗产葡萄酒品牌。</p>
+                <p>选址加州纳帕谷，推出"飞虎徽章"酒标系列，全美首个军事航空遗产酒庄品牌。</p>
             </div>
             <div class="project-card">
-                <div class="icon">🏡</div>
                 <h4>飞虎康养中心</h4>
                 <p>优先服务飞虎队后代，提供家庭式智慧养老服务，融合医疗康养与社区关怀。</p>
             </div>
             <div class="project-card">
-                <div class="icon">🎖️</div>
-                <h4>飞虎军品 & 文创</h4>
-                <p>复刻经典飞虎军品，推出限量收藏系列，用文创让飞虎文化走进千家万户。</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- MUSEUM -->
-<section class="museum" id="museum">
-    <div class="section-inner fade-in">
-        <p class="section-label">Chennault Museum</p>
-        <h2 class="section-title">陈纳德航空军事博物馆</h2>
-        <div class="gold-line"></div>
-        <div class="museum-grid">
-            <div class="museum-text">
-                <h3>世界上最大的陈纳德文物收藏</h3>
-                <p>
-                    位于路易斯安那州门罗市的<strong>陈纳德航空军事博物馆</strong>（Chennault Aviation & Military Museum）是全球飞虎文化的圣地。博物馆坐落在前塞尔曼陆军航空领航学校旧址上，馆内收藏了世界上最丰富的陈纳德将军文物。
-                </p>
-                <p>
-                    博物馆由陈纳德将军外孙女 <strong>Nell Chennault Calloway</strong> 女士担任馆长。她说："这不仅仅是关于事实和文物——而是关于人。当你讲述他们的故事时，历史变得真实，这就是激励下一代的力量。"
-                </p>
-                <p>
-                    展馆面积超过6000平方米，设有飞虎队、D-Day、塞尔曼航校、NASA等九大专题展区，以及户外航空公园展示的多型军用飞机。每年秋季举办的 <strong>Chennault Fest</strong> 航空节是门罗市最盛大的活动之一。
-                </p>
-            </div>
-            <div class="museum-info">
-                <div class="museum-info-item">
-                    <span class="icon">📍</span>
-                    <div class="info">
-                        <h4>地址</h4>
-                        <p>701 Kansas Lane, Monroe, Louisiana 71203</p>
-                    </div>
-                </div>
-                <div class="museum-info-item">
-                    <span class="icon">🕐</span>
-                    <div class="info">
-                        <h4>开放时间</h4>
-                        <p>周二至周六 9:00 AM – 4:00 PM</p>
-                    </div>
-                </div>
-                <div class="museum-info-item">
-                    <span class="icon">🌐</span>
-                    <div class="info">
-                        <h4>官网</h4>
-                        <p><a href="https://www.chennaultmuseum.org" target="_blank" style="color: var(--gold);">www.chennaultmuseum.org</a></p>
-                    </div>
-                </div>
-                <div class="museum-info-item">
-                    <span class="icon">👩‍✈️</span>
-                    <div class="info">
-                        <h4>馆长</h4>
-                        <p>Nell Chennault Calloway · 陈纳德将军外孙女</p>
-                    </div>
-                </div>
-                <div class="museum-info-item">
-                    <span class="icon">🎪</span>
-                    <div class="info">
-                        <h4>年度活动</h4>
-                        <p>Chennault Fest 航空节 · Freedom Trees 节日展</p>
-                    </div>
-                </div>
+                <h4>飞虎文创与军品</h4>
+                <p>复刻经典飞虎军品，推出限量收藏系列，让飞虎文化走进千家万户。</p>
             </div>
         </div>
     </div>
@@ -775,24 +746,21 @@
         <p class="section-label">Contact</p>
         <h2 class="section-title">联系我们</h2>
         <div class="gold-line" style="margin: 0 auto 2rem;"></div>
-        <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 2rem;">
-            如果您对飞虎文化交流、飞虎小镇项目、EB-5投资移民或任何合作有兴趣，欢迎与我们联系。
+        <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 2rem; line-height: 1.9;">
+            如果您对飞虎文化交流、飞虎小镇项目、EB-5投资移民或任何形式的合作有兴趣，欢迎与我们联系。
         </p>
         <div class="contact-info">
             <div class="contact-item">
-                <div class="icon">📍</div>
-                <h4>注册地</h4>
+                <h4>Registered</h4>
                 <p>Los Angeles, California, USA</p>
             </div>
             <div class="contact-item">
-                <div class="icon">📧</div>
-                <h4>邮箱</h4>
+                <h4>Email</h4>
                 <a href="mailto:info@flyingtigersculture.org">info@flyingtigersculture.org</a>
             </div>
             <div class="contact-item">
-                <div class="icon">🌐</div>
-                <h4>关注我们</h4>
-                <p>微信 · LinkedIn · Facebook</p>
+                <h4>Connect</h4>
+                <p>WeChat &middot; LinkedIn &middot; Facebook</p>
             </div>
         </div>
     </div>
@@ -800,28 +768,24 @@
 
 <!-- FOOTER -->
 <footer>
-    <p>© 2026 美国飞虎文化交流协会 American Flying Tigers Cultural Exchange Association</p>
-    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; opacity: 0.6;">
-        弘扬飞虎精神 · 传承历史记忆 · 推动中美文化交流
+    <p>&copy; 2026 美国飞虎文化交流协会 &middot; American Flying Tigers Cultural Exchange Association</p>
+    <p style="font-size: 0.72rem; color: rgba(156,163,175,0.5); margin-top: 0.3rem;">
+        弘扬飞虎精神 &middot; 传承历史记忆 &middot; 推动中美文化交流
     </p>
     <div class="footer-links">
         <a href="#history">飞虎历史</a>
         <a href="#friendship">中美友谊</a>
         <a href="#about">协会简介</a>
         <a href="#monroe">飞虎小镇</a>
-        <a href="#museum">博物馆</a>
         <a href="#contact">联系</a>
     </div>
 </footer>
 
 <script>
-    // Fade-in on scroll
     const observer = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Close mobile nav on link click
     document.querySelectorAll('.nav-links a').forEach(a => {
         a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
